@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "usuario")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignorar los proxies de Hibernate
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "dni", nullable = false, length = 15)
@@ -34,8 +35,8 @@ public class Usuario {
     private String tipo;
 
     @Column(name = "penalizacionHasta")
+    @JsonFormat(pattern = "yyyy-MM-dd") // Asegúrate de formatear la fecha correctamente
     private LocalDate penalizacionHasta;
-
     @OneToMany(mappedBy = "usuario")
     @JsonManagedReference
     private Set<Prestamo> prestamos = new LinkedHashSet<>();

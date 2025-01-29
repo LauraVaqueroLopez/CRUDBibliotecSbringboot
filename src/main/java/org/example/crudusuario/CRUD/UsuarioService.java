@@ -20,7 +20,6 @@ public class UsuarioService {
     // Obtener todos los usuarios
     public List<Usuario> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioRepository.findAll();
-        // Inicializar las colecciones para evitar el proxy de Hibernate
         usuarios.forEach(usuario -> usuario.getPrestamos().size());
         return usuarios;
     }

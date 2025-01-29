@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -36,13 +37,13 @@ public class UsuarioController {
         return usuario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Actualizar usuario
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioActualizado) {
         Usuario usuario = usuarioService.actualizarUsuario(id, usuarioActualizado);
         return (usuario != null) ? new ResponseEntity<>(usuario, HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
     // Eliminar usuario
     @DeleteMapping("/{id}")
